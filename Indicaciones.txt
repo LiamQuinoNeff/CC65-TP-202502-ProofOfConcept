@@ -1,0 +1,49 @@
+Se debe descargar el dataset de kaggle:
+Procese perfiles de usuarios del dataset Steam Reviews 2021 
+(https://www.kaggle.com/datasets/najzeko/steam-reviews-2021/data).
+Pues el archivo es muy pesado.
+
+Luego, se tiene que ejecutar clean.go, y luuego:
+- clean_cosine.go
+- clean_pearson.go
+- clean_jaccard.go
+
+y luego se puede ejecutar los diferentes algoritmos, tanto en secuencial como concurrente
+
+
+
+Ejemplos PowerShell para probar cortes (consistente)
+------------------------------------------------
+Nota: abre un terminal PowerShell y sitúate en la carpeta del algoritmo que quieras ejecutar (`cosine`, `pearson` o `jaccard`).
+
+# Recomendación general
+- Usar `--reps=5` para mediciones razonablemente estables (puedes bajar a 3 para pruebas rápidas).
+- Fijar `--workers=8` en concurrente para controlar el grado de paralelismo (ajústalo a tu máquina).
+
+# Ejemplo: comandos (ejecutar desde la carpeta del algoritmo)
+Set-Location -Path 'C:\...\cosine'
+
+# Secuencial: 10% (reps=5)
+go run seq.go --pct=10 --reps=5
+
+# Concurrente: 10% (workers=8, reps=5)
+go run conc.go --pct=10 --workers=8 --reps=5
+
+# Repetir para 25%, 50% y 100%
+go run seq.go --pct=25 --reps=5
+go run conc.go --pct=25 --workers=8 --reps=5
+go run seq.go --pct=50 --reps=5
+go run conc.go --pct=50 --workers=8 --reps=5
+go run seq.go --pct=100 --reps=5
+go run conc.go --pct=100 --workers=8 --reps=5
+
+# Opcional: guardar summary CSV (ejemplo)
+go run seq.go --pct=10 --reps=5 --out '..\results\cosine_seq_pct10.csv'
+go run conc.go --pct=10 --workers=8 --reps=5 --out '..\results\cosine_conc_pct10.csv'
+
+# Notas útiles
+- Si Pearson o Jaccard indican que el `target` no existe, usa `--target <user_id>` para elegir otro usuario.
+- Para `--raw` (imprimir info humana), pasa la ruta a `steam_reviews_clean.csv` si no está en `../data`.
+
+
+
