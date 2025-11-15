@@ -39,7 +39,4 @@ Repite para `pct=25,50,100`. Para `jaccard` y `pearson` los comandos son idénti
 - En Pearson se requiere al menos 2 ítems en común para calcular correlación válida; si el target queda fuera del subset el programa puede seleccionar un target alternativo (fallback).
 
 ## Recolección y análisis automático
-- Cada programa puede generar un CSV resumen con `--out` que contiene columnas como `elapsed_ms_mean` y `elapsed_ms_std`. Estos CSVs permiten calcular speedup y eficiencia de forma automática.
-
-## Soporte
-Si quieres que unifique la interfaz (por ejemplo hacer que `--target` esté en todos los algoritmos y añadir muestreo aleatorio) dímelo y lo agrego.
+- Cada programa puede generar un CSV resumen con `--out` que contiene columnas como `elapsed_ms_mean` y `elapsed_ms_std`. Estos CSVs permiten calcular speedup y eficiencia de forma automática.
